@@ -4,7 +4,7 @@ import Colors from '../../constants/Color'
 import { API_URL } from '../../constants/URL';
 import axios from "axios";
 
-const Register = () => {
+const Register = ({ navigation }) => {
      const [name, setName] = useState("");
      const [password, setPassword] = useState("");
      const [confirmPassword, setConfirmPassword] = useState("");
@@ -83,7 +83,9 @@ const styles = StyleSheet.create({
           fontSize: 20,
           paddingTop: 100,
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          fontWeight: 'bold',
+          paddingBottom: 30,
      },
      form: {
           padding: 25,
@@ -115,6 +117,7 @@ const styles = StyleSheet.create({
      buttonText: {
           color: '#fff',
           fontSize: 16,
+          fontWeight: 'bold',
      },
      btnReg: {
           fontSize: 12,

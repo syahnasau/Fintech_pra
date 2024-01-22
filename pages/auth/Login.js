@@ -87,8 +87,10 @@ const styles = StyleSheet.create({
      h1: {
           fontSize: 20,
           paddingTop: 100,
+          paddingBottom: 30,
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          fontWeight: 'bold',
      },
      form: {
           padding: 25,
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
      buttonText: {
           color: '#fff',
           fontSize: 16,
+          fontWeight: 'bold',
      },
      btnReg: {
           fontSize: 12,

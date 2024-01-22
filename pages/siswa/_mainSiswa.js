@@ -23,7 +23,7 @@ const _mainSiswa = () => {
                          tabBarIcon: ({ color, size }) => (
                               <Ionicons name="home-outline" size={size} color={color} />
                             ),
-                         headerShown: true,
+                         headerShown: false,
                          headerTitleAlign: 'center',
                     }}
                />

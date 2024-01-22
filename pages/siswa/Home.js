@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { API_URL } from '../../constants/URL';
+import Colors from '../../constants/Color';
+import CardProduct from './CardProduct';
+import ProductCard from './CardProduct';
 
 const HomeSiswa = ({ navigation, route }) => {
      const [data, setData] = useState([]);
@@ -66,20 +69,34 @@ const HomeSiswa = ({ navigation, route }) => {
 
      return (
           <SafeAreaView style={styles.container}>
-               <View style={styles.paymentDetails}>
-                    <Text style={styles.paymentType}>Cordpay</Text>
-                    <Text style={styles.cardNumber}>2457 3569 2547 6893</Text>
-                    <Text style={styles.cardHolder}>Rose Glory</Text>
+               <View style={styles.viewUser}>
+                    <Text style={styles.textName}>Hi, {username ?? name}!</Text>
+                    <TouchableOpacity onPress={handleLogout}>
+                         <Ionicons name="log-out-outline" size={26} color="black" />
+                    </TouchableOpacity>
+
                </View>
-               <View style={styles.quickFeatures}>
-                    <Text style={styles.feature}>Transactions</Text>
-                    <Text style={styles.feature}>Request</Text>
-                    <Text style={styles.feature}>cordpay</Text>
-                    <Text style={styles.feature}>Check</Text>
-                    <Text style={styles.feature}>conce</Text>
+
+               <View style={styles.cardContainer}>
+                    <Text style={{ marginTop: 20 }}>Balance</Text>
+                    <Text style={styles.balanceText}>Rp{data.difference}</Text>
+                    <View style={styles.buttonContainer}>
+                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TopUp')} >
+                              <Text style={styles.buttonText}>Top Up</Text>
+                         </TouchableOpacity>
+                         <TouchableOpacity style={styles.button} >
+                              <Text style={styles.buttonText}>Withdraw</Text>
+                         </TouchableOpacity>
+                    </View>
                </View>
-               
-               <Text style={styles.expiryDate}>Expiry: 10/26</Text>
+
+               <ProductCard/>
+
+               <TouchableOpacity onPress={() => navigation.navigate('TopUp')}>
+                    <Text>TOP UP</Text>
+               </TouchableOpacity>
+
+               {/* <Text style={styles.expiryDate}>Expiry: 10/26</Text> */}
           </SafeAreaView>
      )
 }
@@ -87,69 +104,54 @@ const HomeSiswa = ({ navigation, route }) => {
 export default HomeSiswa
 
 const styles = StyleSheet.create({
+     viewUser: {
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          marginBottom: 20
+     },
+     textName: {
+          fontSize: 16,
+          fontWeight: 'bold',
+     },
      container: {
-          backgroundColor: 'white',
+          // backgroundColor: Colors.white,
           borderRadius: 10,
           padding: 16,
+          
+          paddingTop: 30
+     },
+     cardContainer: {
+          backgroundColor: Colors.white,
+          borderRadius: 10,
+          padding: 16,
+          marginBottom: 20,
           shadowColor: 'black',
-          shadowOpacity: 0.1,
+          shadowOpacity: 0.2,
           shadowRadius: 10,
           shadowOffset: { width: 0, height: 0 },
+          height: 160
      },
-     paymentDetails: {
-          marginBottom: 16,
-     },
-     paymentType: {
-          fontSize: 16,
+     balanceText: {
+          fontSize: 20,
           fontWeight: 'bold',
-          textTransform: 'uppercase',
+          marginBottom: 15,
      },
-     cardNumber: {
-          fontSize: 16,
-          fontWeight: 'bold',
-          marginTop: 8,
-     },
-     cardHolder: {
-          fontSize: 16,
-          marginTop: 8,
-     },
-     quickFeatures: {
+     buttonContainer: {
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginBottom: 16,
      },
-     feature: {
-          backgroundColor: '#f2f2f2',
-          borderRadius: 10,
-          padding: 8,
-          fontSize: 12,
-          textAlign: 'center',
-          width: '20%',
+     button: {
+          flex: 1,
+          backgroundColor: Colors.green, // Adjust the color to your preference
+          borderRadius: 5,
+          padding: 10,
+          alignItems: 'center',
+          margin: 5,
      },
-     recentActivity: {
-          marginBottom: 16,
-     },
-     activity: {
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginBottom: 8,
-     },
-     activityUser: {
-          fontSize: 14,
-          width: '30%',
-     },
-     activityTime: {
-          fontSize: 12,
-          width: '40%',
-     },
-     activityAmount: {
-          fontSize: 14,
+     buttonText: {
+          color: Colors.white, // Adjust the color to your preference
           fontWeight: 'bold',
-          width: '30%',
-          textAlign: 'right',
      },
-     expiryDate: {
-          fontSize: 14,
-          textAlign: 'right',
-     },
+
 })
+
