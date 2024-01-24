@@ -1,27 +1,28 @@
-import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { API_URL } from '../../constants/URL';
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Colors from '../../constants/Color';
 
-const TopUp = () => {
+const TopUp = (navigation) => {
      const [credit, setCredit] = useState("");
 
      const handleTopUp = async () => {
           try {
                const token = await AsyncStorage.getItem("token");
                await axios.post(`${API_URL}topup`, {
-                    credit: creditTopUp
+                    credit: credit
 
                }, {
                     headers: {
                          Authorization: `Bearer ${token}`,
                     },
                });
-               setCreditTopUp("");
+               console.log(credit);
+               setCredit("");
                Alert.alert("Top Up successfully, please wait");
-               navigation.navigate("_mainSiswa");
+               // navigation.navigate("_mainSiswa");
           } catch (e) {
                console.log(e);
           }
@@ -29,8 +30,7 @@ const TopUp = () => {
      return (
           <SafeAreaView style={styles.container}>
 
-               <Image ssource={require('../../assets/img/topup.png')}
-                    style={styles.image} />
+               {/* <Image ssource={require('../../assets/img/topup.png')} style={styles.image} /> */}
 
                <View style={styles.form}>
                     <Text style={styles.h1}>Top Up</Text>

@@ -65,7 +65,7 @@ const Login = ({ navigation }) => {
                          placeholder="Enter password"
                          secureTextEntry
                     />
-                    <TouchableOpacity style={styles.button} onPress={ handleLogin }>
+                    <TouchableOpacity style={styles.button} onPress={handleLogin}>
                          <Text style={styles.buttonText}>Login</Text>
                     </TouchableOpacity>
 
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
      btnReg: {
           fontSize: 12,
           color: Colors.green,
-          paddingTop: 10
+          paddingTop: 10,
+          paddingBottom: 10
      }
 })
 

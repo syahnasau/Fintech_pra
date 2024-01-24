@@ -12,8 +12,9 @@ import _mainAdmin from './pages/admin/_mainAdmin';
 import TopUp from './pages/siswa/TopUp';
 import WithDraw from './pages/bank/WithDraw';
 import WelcomePage from './pages/Welcome';
-import CardProduct from './pages/siswa/CardProduct';
-import ProductCard from './pages/siswa/CardProduct';
+import EditProduct from './pages/kantin/product/EditProduct';
+import Category from './pages/kantin/category/Category';
+import CreateProduct from './pages/kantin/product/CreateProduct';
 
 // import { AppRegistry } from 'react-native';
 // AppRegistry.registerComponent(appName, () => App);
@@ -60,7 +61,7 @@ export default function App() {
                <NavigationContainer >
                     <Stack.Navigator>
 
-                         <Stack.Screen name="Welcome" component={WelcomePage} options={{ headerShown: false }} />
+                         <Stack.Screen name="WelcomePage" component={WelcomePage} options={{ headerShown: false }} />
 
                          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
@@ -72,6 +73,11 @@ export default function App() {
 
                          <Stack.Screen name="TopUp" component={TopUp} options={{ headerShown: false }} />
                          <Stack.Screen name="WithDraw" component={WithDraw} options={{ headerShown: false }} />
+
+                         <Stack.Screen name="CreateProduct" component={CreateProduct} options={{ headerShown: false }} />
+                         <Stack.Screen name="EditProduct" component={EditProduct} options={{ headerShown: false }} />
+
+                         <Stack.Screen name="Category" component={Category} options={{ headerShown: false }} />
 
                          {/* <Stack.Screen name="CardProduct" component={ProductCard} options={{ headerShown: false }} /> */}
 

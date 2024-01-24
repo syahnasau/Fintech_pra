@@ -3,7 +3,8 @@ const Colors = {
      balck: '#242d34',
      red: '#c10031',
      grey: '#b2b2b2',
-     white: '#fff'
-   };
-   
-   export default Colors;
+     white: '#fff',
+     oren: '#ffb700'
+};
+
+export default Colors;

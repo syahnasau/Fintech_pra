@@ -22,8 +22,8 @@ const _mainBank = () => {
                          tabBarLabel: "Home",
                          tabBarIcon: ({ color, size }) => (
                               <Ionicons name="home-outline" size={size} color={color} />
-                            ),
-                         headerShown: true,
+                         ),
+                         headerShown: false,
                          headerTitleAlign: 'center',
                     }}
                />
@@ -33,20 +33,8 @@ const _mainBank = () => {
                     options={{
                          tabBarLabel: "Cart",
                          tabBarIcon: ({ color, size }) => (
-                              <Ionicons name="cart-outline" size={size} color={color} /> 
-                            ),
-                         headerShown: true,
-                         headerTitleAlign: 'center',
-                    }}
-               />
-               <Tab.Screen
-                    name="Report"
-                    component={ReportBank}
-                    options={{
-                         tabBarLabel: "Cart",
-                         tabBarIcon: ({ color, size }) => (
-                              <Ionicons name="cart-outline" size={size} color={color} /> 
-                            ),
+                              <Ionicons name="cart-outline" size={size} color={color} />
+                         ),
                          headerShown: true,
                          headerTitleAlign: 'center',
                     }}

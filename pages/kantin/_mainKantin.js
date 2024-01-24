@@ -3,6 +3,7 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeKantin from './Home';
+import ReportKantin from './Report';
 
 const _mainKantin = () => {
      const Tab = createBottomTabNavigator();
@@ -20,35 +21,23 @@ const _mainKantin = () => {
                          tabBarLabel: "Home",
                          tabBarIcon: ({ color, size }) => (
                               <Ionicons name="home-outline" size={size} color={color} />
-                            ),
-                         headerShown: true,
-                         headerTitleAlign: 'center',
-                    }}
-               />
-               {/* <Tab.Screen
-                    name="Cart"
-                    component={Cart}
-                    options={{
-                         tabBarLabel: "Cart",
-                         tabBarIcon: ({ color, size }) => (
-                              <Ionicons name="cart-outline" size={size} color={color} /> 
-                            ),
-                         headerShown: true,
+                         ),
+                         headerShown: false,
                          headerTitleAlign: 'center',
                     }}
                />
                <Tab.Screen
-                    name="Profile"
-                    component={Profile}
+                    name="Report"
+                    component={ReportKantin}
                     options={{
-                         tabBarLabel: "Cart",
+                         tabBarLabel: "Home",
                          tabBarIcon: ({ color, size }) => (
-                              <Ionicons name="cart-outline" size={size} color={color} /> 
-                            ),
+                              <Ionicons name="home-outline" size={size} color={color} />
+                         ),
                          headerShown: true,
                          headerTitleAlign: 'center',
                     }}
-               /> */}
+               />
           </Tab.Navigator>
      )
 }

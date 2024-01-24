@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeSiswa from './Home';
@@ -22,7 +22,7 @@ const _mainSiswa = () => {
                          tabBarLabel: "Home",
                          tabBarIcon: ({ color, size }) => (
                               <Ionicons name="home-outline" size={size} color={color} />
-                            ),
+                         ),
                          headerShown: false,
                          headerTitleAlign: 'center',
                     }}
@@ -33,8 +33,8 @@ const _mainSiswa = () => {
                     options={{
                          tabBarLabel: "Cart",
                          tabBarIcon: ({ color, size }) => (
-                              <Ionicons name="cart-outline" size={size} color={color} /> 
-                            ),
+                              <Ionicons name="cart-outline" size={size} color={color} />
+                         ),
                          headerShown: true,
                          headerTitleAlign: 'center',
                     }}
@@ -43,10 +43,10 @@ const _mainSiswa = () => {
                     name="Profile"
                     component={Profile}
                     options={{
-                         tabBarLabel: "Cart",
+                         tabBarLabel: "Profile",
                          tabBarIcon: ({ color, size }) => (
-                              <Ionicons name="cart-outline" size={size} color={color} /> 
-                            ),
+                              <Ionicons name="person-outline" size={size} color={color} />
+                         ),
                          headerShown: true,
                          headerTitleAlign: 'center',
                     }}

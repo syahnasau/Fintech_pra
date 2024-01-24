@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView, ScrollView, RefreshControl, Alert } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { API_URL } from '../../constants/URL';
 import Colors from '../../constants/Color';
-import CardProduct from './CardProduct';
 import ProductCard from './CardProduct';
 
 const HomeSiswa = ({ navigation, route }) => {
@@ -31,6 +30,7 @@ const HomeSiswa = ({ navigation, route }) => {
           setRoleAuth(role);
           setName(name);
      };
+     
 
      useEffect(() => {
           fetchData();
@@ -42,7 +42,7 @@ const HomeSiswa = ({ navigation, route }) => {
 
      const onRefresh = async () => {
           setRefresh(true);
-          await fetchData();
+          fetchData();
           setTimeout(() => {
                setRefresh(false);
           }, 2000);
@@ -51,9 +51,7 @@ const HomeSiswa = ({ navigation, route }) => {
      const handleLogout = async () => {
           try {
                const token = await AsyncStorage.getItem("token");
-               await axios.post(
-                    `${API_URL}logout`,
-                    {},
+               await axios.post(`${API_URL}logout`, {},
                     {
                          headers: {
                               Authorization: `Bearer ${token}`,
@@ -61,7 +59,7 @@ const HomeSiswa = ({ navigation, route }) => {
                     }
                );
                await AsyncStorage.multiRemove(["token", "role"]);
-               navigation.navigate("Login");
+               navigation.navigate('WelcomePage');
           } catch (e) {
                console.log(e);
           }
@@ -69,32 +67,60 @@ const HomeSiswa = ({ navigation, route }) => {
 
      return (
           <SafeAreaView style={styles.container}>
-               <View style={styles.viewUser}>
-                    <Text style={styles.textName}>Hi, {username ?? name}!</Text>
-                    <TouchableOpacity onPress={handleLogout}>
-                         <Ionicons name="log-out-outline" size={26} color="black" />
-                    </TouchableOpacity>
+          <ScrollView refreshControl={
+               <RefreshControl refreshing={refresh} onRefresh={onRefresh}/>
+          }>
 
-               </View>
+                    <View style={styles.viewUser}>
+                         <Text style={styles.textName}>Hi, {username ?? name}!</Text>
+                         <TouchableOpacity onPress={handleLogout}>
+                              <Ionicons name="log-out-outline" size={26} color="black" />
+                         </TouchableOpacity>
 
-               <View style={styles.cardContainer}>
-                    <Text style={{ marginTop: 20 }}>Balance</Text>
-                    <Text style={styles.balanceText}>Rp{data.difference}</Text>
-                    <View style={styles.buttonContainer}>
-                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TopUp')} >
-                              <Text style={styles.buttonText}>Top Up</Text>
-                         </TouchableOpacity>
-                         <TouchableOpacity style={styles.button} >
-                              <Text style={styles.buttonText}>Withdraw</Text>
-                         </TouchableOpacity>
                     </View>
-               </View>
 
-               <ProductCard/>
+                    <View style={styles.cardContainer}>
+                         <Text >Balance</Text>
+                         <Text style={styles.balanceText}>Rp{data.difference}</Text>
+                         <View style={styles.buttonContainer}>
+                              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TopUp')} >
+                                   <Text style={styles.buttonText}>Top Up</Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity style={styles.button} >
+                                   <Text style={styles.buttonText}>Withdraw</Text>
+                              </TouchableOpacity>
+                         </View>
+                    </View>
 
-               <TouchableOpacity onPress={() => navigation.navigate('TopUp')}>
-                    <Text>TOP UP</Text>
-               </TouchableOpacity>
+                    <View>
+                         {data.products?.map((item, index) => (
+
+                         <ProductCard
+                              name={item.name}
+                              photo={`${item.photo}`}
+                              price={item.price}
+                              role={roleAuth}
+                              stand={item.stand}
+                              stock={item.stock}
+                              id={item.id}
+                              navigation={navigation}
+                         />
+
+                         ))}
+                    </View>
+
+               {/* <View>
+                         <View style={style.cardProduct}>
+                              <Image/>
+                              <Text>{data.price}</Text>
+                              <Text></Text>
+                              <Text></Text>
+                              <TouchableOpacity>
+                                   <Text>Add Cart</Text>
+                              </TouchableOpacity>
+                         </View>
+               </View> */}
+          </ScrollView>
 
                {/* <Text style={styles.expiryDate}>Expiry: 10/26</Text> */}
           </SafeAreaView>
@@ -129,7 +155,7 @@ const styles = StyleSheet.create({
           shadowOpacity: 0.2,
           shadowRadius: 10,
           shadowOffset: { width: 0, height: 0 },
-          height: 160
+          height: 150
      },
      balanceText: {
           fontSize: 20,
